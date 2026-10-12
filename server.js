@@ -7,6 +7,8 @@ const PORT = 9091;
 //import global middleware
 const logger = require("./middlewares/logger")
 const checkApi = require("./middlewares/checkApi")
+const authenticate = require("./middlewares/authenticate");
+
 
 //server
 const server = express();
@@ -15,10 +17,14 @@ server.use(cors());
 //server.use(logger)
 
 //import routes
+const authRouter = require("./modules/auth/routes");
+server.use("/auth", authRouter)
+server.use(authenticate)
 const authorsRoute = require("./modules/authors/routes")
 server.use("/authors", authorsRoute);
-const blogPostsRoute = require("./modules/blogPosts/routes")
+const blogPostsRoute = require("./modules/blogPosts/routes");
 server.use("/blogPosts", blogPostsRoute);
+
 
 const startServer = async (port, server) => {
   await initDataBaseConnection();

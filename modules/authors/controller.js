@@ -1,6 +1,7 @@
 const { default: mongoose } = require("mongoose");
 const sendGrid = require("@sendgrid/mail")
 const authorService = require("./service");
+const bcrypt = require("bcrypt")
 
 const findAll = async (req, res, next) => {
   try {
@@ -42,9 +43,16 @@ const findOne = async (req, res, next) => {
 };
 
 const create = async (req, res, next) => {
-  const { body } = req;
+  const { name, surname, email,password, dob, avatar } = req.body;
   try {
-    const author = await authorService.create(body);
+    const author = await authorService.create({
+      name,
+      surname,
+      email,
+      password,
+      dob,
+      avatar
+    });
     sendGrid.setApiKey(process.env.SENDGRID_API_KEY)
     const msg = {
       to: author.email,

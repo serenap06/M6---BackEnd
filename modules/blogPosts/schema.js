@@ -14,6 +14,16 @@ const blogPostSchema = new mongoose.Schema(
       min: 1,
       max: 255,
     },
+    content: {
+      type: String,
+      required: true,
+      min: 1,
+      max: 255,
+    },
+    author:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref: 'Author'
+    },
     cover: {
       type: String,
       required: false,
