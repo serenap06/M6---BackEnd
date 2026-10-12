@@ -1,7 +1,7 @@
 const { default: mongoose } = require("mongoose");
-const sendGrid = require("@sendgrid/mail")
+const sendGrid = require("@sendgrid/mail");
 const authorService = require("./service");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 
 const findAll = async (req, res, next) => {
   try {
@@ -43,7 +43,7 @@ const findOne = async (req, res, next) => {
 };
 
 const create = async (req, res, next) => {
-  const { name, surname, email,password, dob, avatar } = req.body;
+  const { name, surname, email, password, dob, avatar } = req.body;
   try {
     const author = await authorService.create({
       name,
@@ -51,18 +51,18 @@ const create = async (req, res, next) => {
       email,
       password,
       dob,
-      avatar
+      avatar,
     });
-    sendGrid.setApiKey(process.env.SENDGRID_API_KEY)
+    sendGrid.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
       to: author.email,
       from: "serenapoletano@gmail.com",
       subject: "Benvenuto su StriveBLog",
       text: "Ti sei registrato correttamente",
-      html: "Ti sei registrato correttamente"
-    }
-    const [response] = await sendGrid.send(msg)
-    console.log("status",response.statusCode)
+      html: "Ti sei registrato correttamente",
+    };
+    const [response] = await sendGrid.send(msg);
+    console.log("status", response.statusCode);
     res.status(201).send({
       statusCode: 201,
       message: "Author saved successfully",

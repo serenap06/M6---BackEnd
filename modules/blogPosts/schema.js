@@ -20,9 +20,9 @@ const blogPostSchema = new mongoose.Schema(
       min: 1,
       max: 255,
     },
-    author:{
-      type:mongoose.Schema.Types.ObjectId,
-      ref: 'Author'
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Author",
     },
     cover: {
       type: String,

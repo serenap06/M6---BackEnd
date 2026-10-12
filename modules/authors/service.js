@@ -1,8 +1,7 @@
 const Author = require("./schema");
 
 const findAll = async () => {
-  return await Author.find()
-  .populate('posts')
+  return await Author.find().populate("posts");
 };
 
 const findOne = async (authorId) => {
@@ -14,14 +13,13 @@ const create = async (body) => {
 };
 const update = async (authorId, body) => {
   return await Author.findByIdAndUpdate(authorId, body, {
-    returnDocument:"after",
+    returnDocument: "after",
     runValidators: true,
   });
 };
 const deleteAuthor = async (authorId) => {
   return await Author.findByIdAndDelete(authorId);
 };
-
 
 module.exports = {
   findAll,

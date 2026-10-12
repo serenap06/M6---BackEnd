@@ -1,14 +1,13 @@
 require("dotenv").config();
 const express = require("express");
-const initDataBaseConnection = require("./config/db")
+const initDataBaseConnection = require("./config/db");
 const cors = require("cors");
 const PORT = 9091;
 
 //import global middleware
-const logger = require("./middlewares/logger")
-const checkApi = require("./middlewares/checkApi")
+const logger = require("./middlewares/logger");
+const checkApi = require("./middlewares/checkApi");
 const authenticate = require("./middlewares/authenticate");
-
 
 //server
 const server = express();
@@ -18,12 +17,14 @@ server.use(cors());
 
 //import routes
 const authRouter = require("./modules/auth/routes");
-server.use("/auth", authRouter)
-server.use(authenticate)
-const authorsRoute = require("./modules/authors/routes")
+server.use("/auth", authRouter);
+server.use(authenticate);
+const authorsRoute = require("./modules/authors/routes");
 server.use("/authors", authorsRoute);
 const blogPostsRoute = require("./modules/blogPosts/routes");
 server.use("/blogPosts", blogPostsRoute);
+const commentsRoute= require("./modules/comments/routes")
+server.use("/blogPosts", commentsRoute);
 
 
 const startServer = async (port, server) => {
@@ -34,4 +35,3 @@ const startServer = async (port, server) => {
 };
 
 startServer(PORT, server);
-

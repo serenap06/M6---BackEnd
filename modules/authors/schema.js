@@ -44,7 +44,7 @@ const authorSchema = new mongoose.Schema(
   },
   { timestamps: true, strict: true },
 );
-// criptaggio password 
+// criptaggio password
 authorSchema.pre("save", async function () {
   if (!this.password || !this.isModified("password")) {
     return;
