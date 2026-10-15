@@ -25,6 +25,10 @@ const authorSchema = new mongoose.Schema(
       required: true,
       select: false,
     },
+    googleID:{
+      type:String,
+      unique:true
+    },
     dob: {
       type: String,
       required: false,

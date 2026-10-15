@@ -25,7 +25,7 @@ const login = async (req, res) => {
       },
       process.env.JWT_SECRET,
       {
-        expiresIn: "24h",
+      expiresIn: process.env.JWT_EXPIRES_IN,
       },
     );
     res.status(200).send({
@@ -43,6 +43,8 @@ const login = async (req, res) => {
 const me = async (req, res) => {
   res.status(200).send(req.author);
 };
+
+
 
 module.exports = {
   login,
